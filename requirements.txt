@@ -1,0 +1,7 @@
+pyts
+pywt
+librosa
+wfdb
+scikit-image
+numpy
+matplotlib
