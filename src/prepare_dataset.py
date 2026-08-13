@@ -104,3 +104,39 @@ def process_all_subjects(subject_ids, data_dir='wesad_data/WESAD'):
         else:
             print(" -> skipped")
     return results
+
+def tag_windows_with_subject(windows, subject_id):
+    """Returns list of (window, subject_id) pairs so the ID travels with the data everywhere."""
+    return [(w, subject_id) for w in windows]
+
+
+def load_ppgdalia_subject(subject_id, dataset_path="ppg_dalia_data"):
+    """Loads a PPG-DaLiA subject .pkl file and returns the dictionary data."""
+    import os
+    import pickle
+
+    file_path = os.path.join(dataset_path, subject_id, f"{subject_id}.pkl")
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"File not found: {file_path}")
+
+    with open(file_path, "rb") as f:
+        data = pickle.load(f, encoding="latin1")
+
+    return data
+
+
+def extract_ppgdalia_signals(data):
+    """Extracts the PPG signal from a PPG-DaLiA subject data dictionary."""
+    if data is None:
+        return None
+
+    # Handle pickle format structure
+    if isinstance(data, dict) and "signal" in data:
+        ppg = data["signal"]["wrist"]["PPG"].flatten()
+    # Handle WFDB record format if used
+    elif hasattr(data, "p_signal"):
+        ppg = data.p_signal[:, 1]  # PPG channel index
+    else:
+        raise ValueError("Unrecognized PPG-DaLiA data format")
+
+    return ppg
