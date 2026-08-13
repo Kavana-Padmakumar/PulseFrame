@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # PulseFrame — Project Progress Log
 
 ## Project Initialization & Environment Setup
@@ -27,3 +28,12 @@
 * **Cross-Dataset Compatibility**: Confirmed that signal windowing and 2D transformation pipelines run unmodified across both lab-controlled (WESAD) and ambulatory (PPG-DaLiA) datasets.
 * **Leakage-Safe Subject Tagging**: Implemented explicit subject ID metadata tagging across all output tensors to support Leave-One-Subject-Out (LOSO) cross-validation and prevent data leakage during train/test splits.
 * **Data Quality Analysis**: Identified and documented structural noise differences, observing significantly higher real-world motion artifacts in PPG-DaLiA signals compared to WESAD baseline conditions.
+=======
+WEEK 1 COMPLETE (Aug 11-15): Environment set up, WESAD + PPG-DaLiA loaded, windowing function built, GAF/RP/CWT imaging pipeline implemented and verified across 3 subjects (S2, S3, S4). No blockers. Ready for Week 2: dataset engineering.
+## PART 5 - Batch Processing Summary
+- Total subjects detected: 1
+- Successfully processed: 0
+- Processed list: []
+
+Extended pipeline to PPG-DaLiA (separate loader, wfdb-based). Confirmed same windowing/imaging code works unmodified across both datasets. Added subject-ID tagging to prevent data leakage in future train/test splits. Noted: PPG-DaLiA signals are visibly noisier (real-world activity vs WESAD's lab conditions), as expected.
+>>>>>>> Stashed changes
